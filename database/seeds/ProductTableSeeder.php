@@ -48,6 +48,10 @@ class ProductTableSeeder extends Seeder
                 'images' => json_encode($images),
                 'number_of_items' => 1,
                 'original_price' => 1000,
+                'size_id' => \App\Data\Models\Size::first()['id'],
+                'brand_id' => \App\Data\Models\Brand::first()['id'],
+                'color_id' => \App\Data\Models\Color::first()['id'],
+                'fabric_age_id' => \App\Data\Models\FabricAge::first()['id'],
                 'created_at' => $date,
                 'updated_at' => $date,
                 'deleted_at' => NULL

@@ -57,7 +57,7 @@ class SizeRepository extends AbstractRepository implements RepositoryContract
      *
      */
     public function findById($id, $refresh = false, $details = false, $encode = true)
-    {        
+    {   
         $data = parent::findById($id, $refresh, $details, $encode);
         $data->formatted_created_at = \Carbon\Carbon::parse($data->created_at)->diffForHumans();
         return $data;

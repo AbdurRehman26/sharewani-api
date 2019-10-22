@@ -18,8 +18,6 @@ class CreateProductsTable extends Migration {
 			$table->string('title')->nullable();
 			$table->text('description', 65535)->nullable();
 			$table->text('images', 65535)->nullable();
-			$table->timestamps();
-			$table->softDeletes();
 			$table->boolean('number_of_items')->nullable()->default(1);
 			$table->integer('user_id')->nullable();
             $table->integer('color_id')->nullable();
@@ -29,6 +27,8 @@ class CreateProductsTable extends Migration {
 			$table->boolean('rent_per_day')->nullable();
 			$table->boolean('base_rent')->nullable();
 			$table->string('original_price', 45)->nullable()->default('1000');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

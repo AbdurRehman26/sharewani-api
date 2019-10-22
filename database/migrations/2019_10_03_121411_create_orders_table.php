@@ -22,10 +22,10 @@ class CreateOrdersTable extends Migration {
 			$table->boolean('status')->default(0);
 			$table->date('from_date')->nullable();
 			$table->date('to_date')->nullable();
-			$table->timestamps();
-			$table->softDeletes();
 			$table->boolean('number_of_items')->nullable()->default(1);
 			$table->unique(['product_id','user_id','status','from_date','to_date'], 'product_user_status_unique');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

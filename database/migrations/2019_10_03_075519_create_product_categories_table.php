@@ -18,8 +18,8 @@ class CreateProductCategoriesTable extends Migration {
 			$table->bigInteger('product_id');
 			$table->integer('category_id');
 			$table->timestamps();
-			$table->softDeletes();
 			$table->unique(['category_id','product_id'], 'product_category_unique');
+			$table->softDeletes();
 		});
 	}
 

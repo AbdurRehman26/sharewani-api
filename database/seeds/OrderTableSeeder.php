@@ -22,9 +22,12 @@ class OrderTableSeeder extends Seeder
         for($i=0; $i<50; $i++){
 
         $userId = \App\Laravue\Models\User::inRandomOrder()->first()['id'];
-		    $productId = \App\Data\Models\Product::inRandomOrder()->first()['id'];
+        $productId = \App\Data\Models\Product::inRandomOrder()->first()['id'];
+
+        $addressId = \App\Data\Models\UserAddress::where('user_id', $userId)->first()['id'];
 
         $data[] = [
+            'address_id' => $addressId,
             'product_id' => $productId,	
             'user_id' => $userId,
             'from_date' => $date,

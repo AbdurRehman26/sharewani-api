@@ -18,8 +18,8 @@ class CreateProductEventsTable extends Migration {
 			$table->bigInteger('product_id');
 			$table->integer('event_id');
 			$table->timestamps();
-			$table->softDeletes();
 			$table->unique(['product_id','event_id'], 'product_event_unique');
+			$table->softDeletes();
 		});
 	}
 

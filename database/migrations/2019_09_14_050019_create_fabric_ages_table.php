@@ -18,9 +18,7 @@ class CreateFabricAgesTable extends Migration
             $table->integer('id', true);
             $table->string('name')->unique('name_UNIQUE');
             $table->timestamps();
-            $table->string('deleted_at', 6)->nullable();
-            $table->integer('parent_id')->nullable();
-
+            $table->softDeletes();
         });
     }
 

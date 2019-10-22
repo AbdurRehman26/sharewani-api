@@ -18,7 +18,8 @@ class CreateColorsTable extends Migration {
             $table->string('name')->unique('name_UNIQUE');
             $table->string('code')->unique('code_UNIQUE');
             $table->timestamps();
-            $table->string('deleted_at', 6)->nullable();
+            $table->softDeletes();
+            
         });
     }
 

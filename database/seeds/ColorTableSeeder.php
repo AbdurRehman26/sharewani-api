@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class ColorTableSeeder extends Seeder
 {
@@ -12,17 +13,27 @@ class ColorTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
 
         $date = Carbon::now()->toDateTimeString();
 
-        $data = [
+        for($i = 0; $i < 20; $i++){
 
-            'name' => 'Red',
+
+        $data[] = [
+
+            'name' => ucwords($faker->safeColorName()),
+            'code' => $faker->safeHexColor(),
             'created_at' => $date,
             'updated_at' => $date,
             'deleted_at' => NULL
 
         ];
+
+
+
+
+        }
 
         \App\Data\Models\Color::insertOnDuplicateKey($data, ['name']);
 
