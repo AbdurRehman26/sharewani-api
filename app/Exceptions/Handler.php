@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use App\Exceptions\API\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +14,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        AuthenticationException::class,
     ];
 
     /**
@@ -21,31 +22,26 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['current_password', 'password', 'password_confirmation'];
 
     /**
-     * Report or log an exception.
+     * Register the exception handling callbacks for the application.
      *
-     * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function register()
     {
-        parent::report($exception);
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
-    public function render($request, Exception $exception)
+    public function report(Throwable $e)
     {
-        return parent::render($request, $exception);
+        if (app()->bound('sentry') && $this->shouldReport($e)) {
+            app('sentry')->captureException($e);
+        }
+
+        parent::report($e);
     }
 }
